@@ -2,7 +2,6 @@ package info.metopt.approx;
 
 public class Dichotomy extends AbstractMethod {
 
-    private double compareEpsilon = 1e-11;
     private double beta;
 
     private double result;
@@ -29,34 +28,30 @@ public class Dichotomy extends AbstractMethod {
         x2 = evaluateSecond();
         double fx1 = Method.evaluate(x1);
         double fx2 = Method.evaluate(x2);
-        if (compare(fx2, fx1)) {
+        if (Method.compare(fx2, fx1)) {
             right = evaluateRight(x2);
         } else {
             left = evaluateLeft(x1);
         }
         log();
 
-        double epsilonN = range(left, right) / 2;
-        if (compare(epsilon, epsilonN)) {
+        double epsilonN = Method.range(left, right) / 2.0;
+        if (Method.compare(epsilon, epsilonN)) {
             finish();
         } else {
             makeIteration();
         }
     }
 
-    @Override
-    public double range(double left, double right) {
-        return right - left;
-    }
 
     @Override
     public double evaluateFirst() {
-        return (left + right - beta) / 2;
+        return (left + right - beta) / 2.0;
     }
 
     @Override
     public double evaluateSecond() {
-        return (left + right + beta) / 2;
+        return (left + right + beta) / 2.0;
     }
 
     @Override
@@ -71,12 +66,7 @@ public class Dichotomy extends AbstractMethod {
 
     @Override
     public void finish() {
-        result = (left + right) / 2;
-    }
-
-    @Override
-    public boolean compare(double first, double second) {
-        return first - second >= compareEpsilon;
+        result = (left + right) / 2.0;
     }
 
     @Override

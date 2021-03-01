@@ -2,6 +2,7 @@ package info.metopt.approx;
 
 public interface Method {
 
+    double compareEpsilon = 1e-11;
 
     static double evaluate(double argument) {
         return (argument * argument) + Math.exp(-0.35 * argument);
@@ -11,7 +12,9 @@ public interface Method {
 
     void makeIteration();
 
-    double range(double left, double right);
+    static double range(double left, double right){
+        return right - left;
+    }
 
     double evaluateFirst();
 
@@ -25,7 +28,9 @@ public interface Method {
 
     //true if first >= second
     //false else
-    boolean compare(double first, double second);
+    static boolean compare(double first, double second){
+        return first - second >= compareEpsilon;
+    }
 
     void log();
 
