@@ -32,6 +32,7 @@ public interface Method {
         return first - second >= compareEpsilon;
     }
 
+
     void log();
 
 }
