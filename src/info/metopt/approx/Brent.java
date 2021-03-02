@@ -6,14 +6,15 @@ public class Brent extends AbstractMethod {
 
     private double K = (3.0 - sqrt(5)) / 2.0;
     private double x, v, w;
-    private double result;
 
     private double d, e;
 
     public Brent(double left, double right, double epsilon) {
-        this.left = left;
-        this.right = right;
-        this.epsilon = epsilon;
+        this(left, right, epsilon, false);
+    }
+
+    public Brent(double left, double right, double epsilon, boolean isLog) {
+        super(left, right, epsilon, isLog);
     }
 
     @Override
@@ -23,6 +24,7 @@ public class Brent extends AbstractMethod {
         w = x;
         d = Method.range(left, right);
         e = d;
+        log();
         makeIteration();
         return result;
     }
@@ -94,7 +96,7 @@ public class Brent extends AbstractMethod {
                     v = u;
                 }
             }
-
+            log();
         }
         finish();
     }
@@ -120,14 +122,10 @@ public class Brent extends AbstractMethod {
     }
 
     @Override
-    public void finish() {
-        result = (left + right) / 2.0;
+    public double getCurrentX() {
+        return (left + right) / 2.0;
     }
 
-    @Override
-    public void log() {
-
-    }
 
     private boolean notEquals(double a, double b, double c) {
         return (a != b) && (a != c) && (b != c);

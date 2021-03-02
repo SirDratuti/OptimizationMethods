@@ -24,6 +24,8 @@ public interface Method {
 
     double evaluateRight(double value);
 
+    double getCurrentX();
+
     void finish();
 
     //true if first >= second

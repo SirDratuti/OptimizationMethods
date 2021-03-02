@@ -3,9 +3,9 @@ package info.metopt.approx;
 public class Main {
 
     public static void main(String[] args) {
-        Dichotomy dichotomy = new Dichotomy(-2.0, 3.0, 1e-5);
+        Dichotomy dichotomy = new Dichotomy(-2.0, 3.0, 1e-5, true);
         Fibonacci fibonacci = new Fibonacci(-2.0, 3.0, 1e-5);
-        Parabola parabola = new Parabola(-2.0, 3.0, 1e-5);
+        Parabola parabola = new Parabola(-2.0, 3.0, 1e-5, false);
         GoldenRatio goldenRatio = new GoldenRatio(-2.0, 3.0, 1e-5);
         Brent brent = new Brent(-2.0, 3.0, 1e-5);
         System.out.println(dichotomy.start());

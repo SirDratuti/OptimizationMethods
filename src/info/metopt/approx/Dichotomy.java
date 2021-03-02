@@ -4,12 +4,12 @@ public class Dichotomy extends AbstractMethod {
 
     private double beta;
 
-    private double result;
-
     public Dichotomy(double left, double right, double epsilon) {
-        this.left = left;
-        this.right = right;
-        this.epsilon = epsilon;
+        this(left, right, epsilon, false);
+    }
+
+    public Dichotomy(double left, double right, double epsilon, boolean isLog) {
+        super(left, right, epsilon, isLog);
         beta = epsilon;
         this.x1 = evaluateFirst();
         this.x2 = evaluateSecond();
@@ -23,7 +23,6 @@ public class Dichotomy extends AbstractMethod {
 
     @Override
     public void makeIteration() {
-
         x1 = evaluateFirst();
         x2 = evaluateSecond();
         double fx1 = Method.evaluate(x1);
@@ -39,6 +38,7 @@ public class Dichotomy extends AbstractMethod {
         if (Method.compare(epsilon, epsilonN)) {
             finish();
         } else {
+            log();
             makeIteration();
         }
     }
@@ -65,12 +65,8 @@ public class Dichotomy extends AbstractMethod {
     }
 
     @Override
-    public void finish() {
-        result = (left + right) / 2.0;
+    public double getCurrentX() {
+        return (left + right) / 2.0;
     }
 
-    @Override
-    public void log() {
-        //System.out.println(left + " " + right);
-    }
 }
