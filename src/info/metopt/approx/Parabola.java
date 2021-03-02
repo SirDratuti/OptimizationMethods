@@ -31,12 +31,24 @@ public class Parabola extends AbstractMethod {
         return result;
     }
 
+    public double evaluate_a0(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+        return fx1;
+    }
+
+    public double evaluate_a1(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+        return (fx2 - fx1) / (x2 - x1);
+    }
+
+    public double evaluate_a2(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+        return 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
+    }
+
     @Override
     public void makeIteration() {
-        double a0 = fx1;
-        double a1 = (fx2 - fx1) / (x2 -  x1);
-        double a2 = 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
-        currentX = (x1 + x2 - (a1/a2))/2;
+        double a0 = evaluate_a0(x1, x2, x3, fx1, fx2, fx3);
+        double a1 = evaluate_a1(x1, x2, x3, fx1, fx2, fx3);
+        double a2 = evaluate_a2(x1, x2, x3, fx1, fx2, fx3);
+        currentX = (x1 + x2 - (a1 / a2)) / 2;
         if (iterationNumber > 0 && Math.abs(currentX - prefX) < epsilon) {
             finish();
             return;

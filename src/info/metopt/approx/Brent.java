@@ -41,9 +41,18 @@ public class Brent extends AbstractMethod {
 
             boolean skip = false;
             double u = left;
+
+
             if (notEquals(x, w, v) && notEquals(Method.evaluate(x), Method.evaluate(w), Method.evaluate(v))) {
-                //parabola method
-                skip = true;
+                Parabola parabola = new Parabola(left, right, epsilon);
+                double a0 = parabola.evaluate_a0(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
+                double a1 = parabola.evaluate_a1(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
+                double a2 = parabola.evaluate_a2(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
+                u = (x + w - a1 / a2) / 2.0;
+                if (Method.compare(u, left) && Method.compare(right, u) && Math.abs(u - x) < g / 2.0) {
+                    u = x - Math.signum(x - (left + right) / 2.0) * tol;
+                    skip = true;
+                }
             }
 
             if (!skip) {
@@ -51,19 +60,19 @@ public class Brent extends AbstractMethod {
                     u = x + K * (right - x);
                     e = left - x;
                 } else {
-                    u = x - K *(x - left);
+                    u = x - K * (x - left);
                     e = x - right;
                 }
             }
 
-            if(Method.compare(tol,Math.abs(u-x))){
+            if (Method.compare(tol, Math.abs(u - x))) {
                 u = x + Math.signum(u - x) * tol;
             }
             d = Math.abs(u - x);
             double fu = Method.evaluate(u);
             double fx = Method.evaluate(x);
-            if(Method.compare(fx,fu)){
-                if(Method.compare(u,x)){
+            if (Method.compare(fx, fu)) {
+                if (Method.compare(u, x)) {
                     left = x;
                 } else {
                     right = x;
@@ -73,15 +82,15 @@ public class Brent extends AbstractMethod {
                 x = u;
 
             } else {
-                if(Method.compare(u,x)){
+                if (Method.compare(u, x)) {
                     right = u;
                 } else {
                     left = u;
                 }
-                if(Method.compare(Method.evaluate(w),Method.evaluate(u))){
+                if (Method.compare(Method.evaluate(w), Method.evaluate(u))) {
                     v = w;
                     w = u;
-                } else if(Method.compare(Method.evaluate(v),Method.evaluate(u)) || v == x || v == w){
+                } else if (Method.compare(Method.evaluate(v), Method.evaluate(u)) || v == x || v == w) {
                     v = u;
                 }
             }

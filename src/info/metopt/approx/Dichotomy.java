@@ -71,6 +71,6 @@ public class Dichotomy extends AbstractMethod {
 
     @Override
     public void log() {
-        System.out.println(left + " " + right);
+        //System.out.println(left + " " + right);
     }
 }
