@@ -37,6 +37,38 @@ public abstract class AbstractMethod implements Method {
         this(left, right, epsilon, false);
     }
 
+    public double getResult() {
+        return result;
+    }
+
+    public List<Double> getRights() {
+        return rights;
+    }
+
+    public List<Double> getLefts() {
+        return lefts;
+    }
+
+    public List<Double> getRatios() {
+        return ratios;
+    }
+
+    public List<Double> getLens() {
+        return lens;
+    }
+
+    public List<Double> getXs() {
+        return xs;
+    }
+
+    public List<Double> getFxs() {
+        return fxs;
+    }
+
+    public long getEvaluationsNumber() {
+        return evaluationsNumber;
+    }
+
     @Override
     public void log() {
         if (!isLog) {
@@ -54,7 +86,7 @@ public abstract class AbstractMethod implements Method {
 
     void printList(List<Double> list) {
         for (double e : list) {
-            System.out.print(e + " ");
+            System.out.println(e);
         }
         System.out.println();
     }

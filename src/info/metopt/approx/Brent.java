@@ -46,11 +46,14 @@ public class Brent extends AbstractMethod {
 
 
             evaluationsNumber += 3;
-            if (notEquals(x, w, v) && notEquals(Method.evaluate(x), Method.evaluate(w), Method.evaluate(v))) {
+            double fx = Method.evaluate(x);
+            double fw = Method.evaluate(w);
+            double fv = Method.evaluate(v);
+            if (notEquals(x, w, v) && notEquals(fx, fw, fv)) {
                 Parabola parabola = new Parabola(left, right, epsilon);
-                double a0 = parabola.evaluate_a0(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
-                double a1 = parabola.evaluate_a1(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
-                double a2 = parabola.evaluate_a2(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
+                double a0 = parabola.evaluate_a0(x, w, v, fx, fw, fv);
+                double a1 = parabola.evaluate_a1(x, w, v, fx, fw, fv);
+                double a2 = parabola.evaluate_a2(x, w, v, fx, fw, fv);
                 u = (x + w - a1 / a2) / 2.0;
                 if (Method.compare(u, left) && Method.compare(right, u) && Math.abs(u - x) < g / 2.0) {
                     u = x - Math.signum(x - (left + right) / 2.0) * tol;
@@ -73,7 +76,6 @@ public class Brent extends AbstractMethod {
             }
             d = Math.abs(u - x);
             double fu = Method.evaluate(u);
-            double fx = Method.evaluate(x);
             evaluationsNumber++;
             if (Method.compare(fx, fu)) {
                 if (Method.compare(u, x)) {
@@ -91,10 +93,10 @@ public class Brent extends AbstractMethod {
                 } else {
                     left = u;
                 }
-                if (Method.compare(Method.evaluate(w), Method.evaluate(u))) {
+                if (Method.compare(fw, fu)) {
                     v = w;
                     w = u;
-                } else if (Method.compare(Method.evaluate(v), Method.evaluate(u)) || v == x || v == w) {
+                } else if (v == x || v == w) {
                     v = u;
                 }
             }
