@@ -11,18 +11,26 @@ public abstract class AbstractMethod implements Method {
     double epsilon;
     double result;
     boolean isLog;
-    private List<Double> rights = new ArrayList<>();
-    private List<Double> lefts = new ArrayList<>();
-    private List<Double> ratios = new ArrayList<>();
-    private List<Double> lens = new ArrayList<>();
-    private List<Double> xs = new ArrayList<>();
-    private List<Double> fxs = new ArrayList<>();
+    private List<Double> rights;
+    private List<Double> lefts;
+    private List<Double> ratios;
+    private List<Double> lens;
+    private List<Double> xs;
+    private List<Double> fxs;
+    long evaluationsNumber;
 
     public AbstractMethod(double left, double right, double epsilon, boolean isLog) {
         this.left = left;
         this.right = right;
         this.epsilon = epsilon;
         this.isLog = isLog;
+        rights = new ArrayList<>();
+        lefts = new ArrayList<>();
+        ratios = new ArrayList<>();
+        lens = new ArrayList<>();
+        xs = new ArrayList<>();
+        fxs = new ArrayList<>();
+        evaluationsNumber = 0;
     }
 
     public AbstractMethod(double left, double right, double epsilon) {
@@ -60,6 +68,7 @@ public abstract class AbstractMethod implements Method {
         System.out.println("МЕТОД: " + this.getClass());
         System.out.println("ИТОГОВЫЙ X: " + result);
         System.out.println("ИТОГОВЫЙ f(X): " + Method.evaluate(result));
+        System.out.println("Количество вычислений функции: " + evaluationsNumber);
         System.out.println("правая граница(" + rights.size() + "): ");
         printList(rights);
         System.out.println("левая граница(" + lefts.size() + "): ");

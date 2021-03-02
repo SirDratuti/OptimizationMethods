@@ -26,7 +26,9 @@ public class Dichotomy extends AbstractMethod {
         x1 = evaluateFirst();
         x2 = evaluateSecond();
         double fx1 = Method.evaluate(x1);
+        evaluationsNumber++;
         double fx2 = Method.evaluate(x2);
+        evaluationsNumber++;
         if (Method.compare(fx2, fx1)) {
             right = evaluateRight(x2);
         } else {

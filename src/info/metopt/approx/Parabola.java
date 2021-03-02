@@ -36,6 +36,7 @@ public class Parabola extends AbstractMethod {
         fx1 = Method.evaluate(x1);
         fx2 = Method.evaluate(x2);
         fx3 = Method.evaluate(x3);
+        evaluationsNumber += 3;
         makeIteration();
         return result;
     }
@@ -66,6 +67,7 @@ public class Parabola extends AbstractMethod {
             return;
         }
         fCurrentX = Method.evaluate(currentX);
+        evaluationsNumber++;
         if (!Method.compare(x1, currentX) && !Method.compare(currentX, x2) && !Method.compare(x2, x3) && Method.compare(fCurrentX, fx2)) {
             x1 = currentX;
             fx1 = fCurrentX;

@@ -49,6 +49,7 @@ public class Fibonacci extends AbstractMethod {
             x2 = evaluateSecond();
             double fx1 = Method.evaluate(x1);
             double fx2 = Method.evaluate(x2);
+            evaluationsNumber += 2;
             if (Method.compare(fx1, fx2)) {
                 left = evaluateLeft(x1);
             } else {

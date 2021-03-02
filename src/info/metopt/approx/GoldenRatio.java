@@ -22,6 +22,7 @@ public class GoldenRatio extends AbstractMethod {
         this.x2 = evaluateSecond();
         this.fx1 = Method.evaluate(x1);
         this.fx2 = Method.evaluate(x2);
+        evaluationsNumber += 2;
         epsilonN = Method.range(left, right) / 2.0;
         makeIteration();
         return result;
@@ -45,6 +46,7 @@ public class GoldenRatio extends AbstractMethod {
                 x2 = left + Method.range(left, right) * PHI;
                 fx2 = Method.evaluate(x2);
             }
+            evaluationsNumber++;
             epsilonN *= PHI;
             log();
             makeIteration();

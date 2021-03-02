@@ -45,6 +45,7 @@ public class Brent extends AbstractMethod {
             double u = left;
 
 
+            evaluationsNumber += 3;
             if (notEquals(x, w, v) && notEquals(Method.evaluate(x), Method.evaluate(w), Method.evaluate(v))) {
                 Parabola parabola = new Parabola(left, right, epsilon);
                 double a0 = parabola.evaluate_a0(x, w, v, Method.evaluate(x), Method.evaluate(w), Method.evaluate(v));
@@ -73,6 +74,7 @@ public class Brent extends AbstractMethod {
             d = Math.abs(u - x);
             double fu = Method.evaluate(u);
             double fx = Method.evaluate(x);
+            evaluationsNumber++;
             if (Method.compare(fx, fu)) {
                 if (Method.compare(u, x)) {
                     left = x;
