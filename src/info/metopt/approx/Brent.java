@@ -37,7 +37,6 @@ public class Brent extends AbstractMethod {
             e = d;
             tol = epsilon * Math.abs(x) + epsilon / 10.0;
             if (Math.abs(x - (left + right) / 2.0) + Method.range(left, right) / 2.0 <= 2.0 * tol) {
-                finish();
                 break;
             }
 
