@@ -103,17 +103,17 @@ public class Main {
             m.start();
             System.out.println(m.getEvaluationsNumber());
         }
-        System.out.println("x для для золотого парабол:");
+        System.out.println("x для для парабол:");
         for (double eps = 1e-1; eps > 1e-7; eps *= 1e-1) {
             m = new Parabola(-2.0, 3.0, eps);
             m.start();
             System.out.println(m.getResult());
         }
-        System.out.println("fx для золотого парабол:");
+        System.out.println("fx для парабол:");
         for (double eps = 1e-1; eps > 1e-7; eps *= 1e-1) {
             m = new Parabola(-2.0, 3.0, eps);
             m.start();
-            System.out.println(Method.evaluate(dichotomy.getResult()));
+            System.out.println(Method.evaluate(m.getResult()));
         }
     }
 }

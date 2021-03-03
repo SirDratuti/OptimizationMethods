@@ -68,19 +68,6 @@ public class Parabola extends AbstractMethod {
         }
         fCurrentX = evaluate(currentX);
         evaluationsNumber++;
-        if (fCurrentX < fx2) {
-            if (currentX < x2) {
-                x3 = x2;
-            } else {
-                x1 = x2;
-            }
-        } else {
-            if (currentX < x2) {
-                x1 = currentX;
-            } else {
-                x3 = currentX;
-            }
-        }
         if (!Method.compare(x1, currentX) && !Method.compare(currentX, x2) && !Method.compare(x2, x3) && Method.compare(fCurrentX, fx2)) {
             x1 = currentX;
             fx1 = fCurrentX;
@@ -102,6 +89,7 @@ public class Parabola extends AbstractMethod {
         right = x3;
         left = x1;
         iterationNumber++;
+        makeIteration();
         log();
     }
 
