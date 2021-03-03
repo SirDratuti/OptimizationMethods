@@ -40,11 +40,8 @@ public class Dichotomy extends AbstractMethod {
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        if (!isLog) {
-            return;
-        }
+    public void printLog() {
+        super.printLog();
         System.out.println("значения x1(" + x1s.size() + "):");
         printList(x1s);
         System.out.println("значения fx1(" + x1s.size() + "):");

@@ -102,6 +102,7 @@ public abstract class AbstractMethod implements Method {
 
     @Override
     public void makeIterations() {
+        log();
         while (makeIteration()) {
             log();
         }
@@ -110,6 +111,7 @@ public abstract class AbstractMethod implements Method {
 
     @Override
     public void makeIterations(long n) {
+        log();
         for (long i = 0; i < n; ++i) {
             makeIteration();
             log();
@@ -120,9 +122,12 @@ public abstract class AbstractMethod implements Method {
     @Override
     public void finish() {
         result = getCurrentX();
-        if (!isLog) {
-            return;
+        if (isLog) {
+            printLog();
         }
+    }
+
+    public void printLog() {
         System.out.println("МЕТОД: " + this.getClass());
         System.out.println("ИТОГОВЫЙ X: " + result);
         System.out.println("ИТОГОВЫЙ f(X): " + evaluate(result));

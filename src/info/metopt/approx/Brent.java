@@ -1,7 +1,5 @@
 package info.metopt.approx;
 
-import static java.lang.Math.sqrt;
-
 public class Brent extends AbstractMethod {
 
     private double K = 1 - GOLDEN_PHI;
@@ -24,7 +22,6 @@ public class Brent extends AbstractMethod {
         w = x;
         d = Method.range(left, right);
         e = d;
-        log();
         makeIterations();
         return result;
     }

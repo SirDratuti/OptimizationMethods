@@ -116,11 +116,8 @@ public class Parabola extends AbstractMethod {
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        if (!isLog) {
-            return;
-        }
+    public void printLog() {
+        super.printLog();
         System.out.println("коэффициенты a0(" + a0s.size() + "):");
         super.printList(a0s);
         System.out.println("коэффициенты a1(" + a1s.size() + "):");
@@ -128,4 +125,5 @@ public class Parabola extends AbstractMethod {
         System.out.println("коэффициенты a2(" + a2s.size() + "):");
         super.printList(a2s);
     }
+
 }
