@@ -89,8 +89,8 @@ public class Parabola extends AbstractMethod {
         right = x3;
         left = x1;
         iterationNumber++;
-        makeIteration();
         log();
+        makeIteration();
     }
 
     @Override
