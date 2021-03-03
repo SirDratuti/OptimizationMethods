@@ -20,10 +20,6 @@ public interface Method {
 
     double evaluateSecond();
 
-    double evaluateLeft(double value);
-
-    double evaluateRight(double value);
-
     double getCurrentX();
 
     void finish();

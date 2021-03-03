@@ -116,16 +116,6 @@ public class Brent extends AbstractMethod {
     }
 
     @Override
-    public double evaluateLeft(double value) {
-        return 0;
-    }
-
-    @Override
-    public double evaluateRight(double value) {
-        return 0;
-    }
-
-    @Override
     public double getCurrentX() {
         return (left + right) / 2.0;
     }

@@ -51,9 +51,9 @@ public class Fibonacci extends AbstractMethod {
             double fx2 = Method.evaluate(x2);
             evaluationsNumber += 2;
             if (Method.compare(fx1, fx2)) {
-                left = evaluateLeft(x1);
+                left = x1;
             } else {
-                right = evaluateRight(x2);
+                right = x2;
             }
             log();
         }
@@ -75,16 +75,6 @@ public class Fibonacci extends AbstractMethod {
                 (fibonacci.get(iterations - iterationNumber + 2))
                         / (fibonacci.get(iterations - iterationNumber + 3))
                         * Method.range(left, right);
-    }
-
-    @Override
-    public double evaluateLeft(double value) {
-        return value;
-    }
-
-    @Override
-    public double evaluateRight(double value) {
-        return value;
     }
 
     @Override

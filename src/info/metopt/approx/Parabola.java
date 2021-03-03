@@ -33,9 +33,9 @@ public class Parabola extends AbstractMethod {
         this.x1 = left;
         this.x3 = right;
         this.x2 = (right + left) / 2;
-        fx1 = Method.evaluate(x1);
-        fx2 = Method.evaluate(x2);
-        fx3 = Method.evaluate(x3);
+        fx1 = evaluate(x1);
+        fx2 = evaluate(x2);
+        fx3 = evaluate(x3);
         evaluationsNumber += 3;
         makeIteration();
         return result;
@@ -66,7 +66,7 @@ public class Parabola extends AbstractMethod {
             finish();
             return;
         }
-        fCurrentX = Method.evaluate(currentX);
+        fCurrentX = evaluate(currentX);
         evaluationsNumber++;
         if (!Method.compare(x1, currentX) && !Method.compare(currentX, x2) && !Method.compare(x2, x3) && Method.compare(fCurrentX, fx2)) {
             x1 = currentX;
@@ -90,7 +90,6 @@ public class Parabola extends AbstractMethod {
         left = x1;
         iterationNumber++;
         log();
-        makeIteration();
     }
 
     @Override
@@ -100,16 +99,6 @@ public class Parabola extends AbstractMethod {
 
     @Override
     public double evaluateSecond() {
-        return 0;
-    }
-
-    @Override
-    public double evaluateLeft(double value) {
-        return 0;
-    }
-
-    @Override
-    public double evaluateRight(double value) {
         return 0;
     }
 

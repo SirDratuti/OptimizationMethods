@@ -69,6 +69,10 @@ public abstract class AbstractMethod implements Method {
         return evaluationsNumber;
     }
 
+    public double evaluate(double argument) {
+        return Method.evaluate(argument);
+    }
+
     @Override
     public void log() {
         if (!isLog) {
