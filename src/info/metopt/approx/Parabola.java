@@ -36,20 +36,19 @@ public class Parabola extends AbstractMethod {
         fx1 = evaluate(x1);
         fx2 = evaluate(x2);
         fx3 = evaluate(x3);
-        evaluationsNumber += 3;
         makeIteration();
         return result;
     }
 
-    public double evaluate_a0(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+    public static double evaluate_a0(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
         return fx1;
     }
 
-    public double evaluate_a1(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+    public static double evaluate_a1(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
         return (fx2 - fx1) / (x2 - x1);
     }
 
-    public double evaluate_a2(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+    public static double evaluate_a2(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
         return 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
     }
 
@@ -60,14 +59,12 @@ public class Parabola extends AbstractMethod {
     }
 
     @Override
-    public void makeIteration() {
+    public boolean makeIteration() {
         currentX = evaluateCurrentX(x1, x2, x3, fx1, fx2, fx3);
         if (iterationNumber > 0 && !Method.compare(Math.abs(currentX - prefX), epsilon)) {
-            finish();
-            return;
+            return false;
         }
         fCurrentX = evaluate(currentX);
-        evaluationsNumber++;
         if (!Method.compare(x1, currentX) && !Method.compare(currentX, x2) && !Method.compare(x2, x3) && Method.compare(fCurrentX, fx2)) {
             x1 = currentX;
             fx1 = fCurrentX;
@@ -89,8 +86,7 @@ public class Parabola extends AbstractMethod {
         right = x3;
         left = x1;
         iterationNumber++;
-        log();
-        makeIteration();
+        return true;
     }
 
     @Override

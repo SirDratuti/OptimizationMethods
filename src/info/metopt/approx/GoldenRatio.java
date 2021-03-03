@@ -1,9 +1,6 @@
 package info.metopt.approx;
 
 public class GoldenRatio extends AbstractMethod {
-
-    private static final double PHI = (Math.sqrt(5.0) - 1.0) / 2.0;
-
     private double fx1;
     private double fx2;
     private double epsilonN;
@@ -22,45 +19,42 @@ public class GoldenRatio extends AbstractMethod {
         this.x2 = evaluateSecond();
         this.fx1 = evaluate(x1);
         this.fx2 = evaluate(x2);
-        evaluationsNumber += 2;
         epsilonN = Method.range(left, right) / 2.0;
-        makeIteration();
+        makeIterations();
         return result;
     }
 
     @Override
-    public void makeIteration() {
+    public boolean makeIteration() {
         if (Method.compare(epsilon, epsilonN)) {
-            finish();
-        } else {
-            if (Method.compare(fx2, fx1)) {
-                right = x2;
-                x2 = x1;
-                fx2 = fx1;
-                x1 = right - Method.range(left, right) * PHI;
-                fx1 = evaluate(x1);
-            } else {
-                left = x1;
-                x1 = x2;
-                fx1 = fx2;
-                x2 = left + Method.range(left, right) * PHI;
-                fx2 = evaluate(x2);
-            }
-            evaluationsNumber++;
-            epsilonN *= PHI;
-            log();
-            makeIteration();
+            return false;
         }
+        if (Method.compare(fx2, fx1)) {
+            right = x2;
+            x2 = x1;
+            fx2 = fx1;
+            x1 = right - Method.range(left, right) * GOLDEN_PHI;
+            fx1 = evaluate(x1);
+        } else {
+            left = x1;
+            x1 = x2;
+            fx1 = fx2;
+            x2 = left + Method.range(left, right) * GOLDEN_PHI;
+            fx2 = evaluate(x2);
+        }
+        evaluationsNumber++;
+        epsilonN *= GOLDEN_PHI;
+        return true;
     }
 
     @Override
     public double evaluateFirst() {
-        return left + (1 - PHI) * Method.range(left, right);
+        return left + (1 - GOLDEN_PHI) * Method.range(left, right);
     }
 
     @Override
     public double evaluateSecond() {
-        return left + PHI * Method.range(left, right);
+        return left + GOLDEN_PHI * Method.range(left, right);
     }
 
     @Override

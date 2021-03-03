@@ -4,13 +4,15 @@ public interface Method {
 
     double compareEpsilon = 1e-11;
 
-    static double evaluate(double argument) {
-        return (argument * argument) + Math.exp(-0.35 * argument);
-    }
+    double evaluate(double argument);
 
     double start();
 
-    void makeIteration();
+    boolean makeIteration();
+
+    void makeIterations();
+
+    void makeIterations(long n);
 
     static double range(double left, double right){
         return right - left;

@@ -36,6 +36,7 @@ public class Dichotomy extends AbstractMethod {
         x2s.add(x2);
         fx1s.add(evaluate(x1));
         fx2s.add(evaluate(x2));
+        evaluationsNumber -= 2;
     }
 
     @Override
@@ -56,17 +57,16 @@ public class Dichotomy extends AbstractMethod {
 
     @Override
     public double start() {
-        makeIteration();
+        makeIterations();
         return result;
     }
 
     @Override
-    public void makeIteration() {
+    public boolean makeIteration() {
         x1 = evaluateFirst();
         x2 = evaluateSecond();
         double fx1 = evaluate(x1);
         double fx2 = evaluate(x2);
-        evaluationsNumber += 2;
         if (Method.compare(fx2, fx1)) {
             right = x2;
         } else {
@@ -74,12 +74,7 @@ public class Dichotomy extends AbstractMethod {
         }
 
         double epsilonN = Method.range(left, right) / 2.0;
-        if (Method.compare(epsilon, epsilonN)) {
-            finish();
-        } else {
-            log();
-            makeIteration();
-        }
+        return !Method.compare(epsilon, epsilonN);
     }
 
 

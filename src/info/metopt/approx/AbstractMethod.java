@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractMethod implements Method {
+    public static final double GOLDEN_PHI = (Math.sqrt(5.0) - 1.0) / 2.0;
+
     double left;
     double right;
     double x1;
@@ -69,8 +71,10 @@ public abstract class AbstractMethod implements Method {
         return evaluationsNumber;
     }
 
+    @Override
     public double evaluate(double argument) {
-        return Method.evaluate(argument);
+        evaluationsNumber++;
+        return (argument * argument) + Math.exp(-0.35 * argument);
     }
 
     @Override
@@ -85,7 +89,8 @@ public abstract class AbstractMethod implements Method {
         }
         lens.add(right - left);
         xs.add(this.getCurrentX());
-        fxs.add(Method.evaluate(this.getCurrentX()));
+        fxs.add(evaluate(this.getCurrentX()));
+        evaluationsNumber--;
     }
 
     void printList(List<Double> list) {
@@ -96,6 +101,23 @@ public abstract class AbstractMethod implements Method {
     }
 
     @Override
+    public void makeIterations() {
+        while (makeIteration()) {
+            log();
+        }
+        finish();
+    }
+
+    @Override
+    public void makeIterations(long n) {
+        for (long i = 0; i < n; ++i) {
+            makeIteration();
+            log();
+        }
+        finish();
+    }
+
+    @Override
     public void finish() {
         result = getCurrentX();
         if (!isLog) {
@@ -103,7 +125,8 @@ public abstract class AbstractMethod implements Method {
         }
         System.out.println("МЕТОД: " + this.getClass());
         System.out.println("ИТОГОВЫЙ X: " + result);
-        System.out.println("ИТОГОВЫЙ f(X): " + Method.evaluate(result));
+        System.out.println("ИТОГОВЫЙ f(X): " + evaluate(result));
+        evaluationsNumber--;
         System.out.println("Количество вычислений функции: " + evaluationsNumber);
         System.out.println("правая граница(" + rights.size() + "): ");
         printList(rights);

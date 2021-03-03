@@ -1,7 +1,6 @@
 package info.metopt.approx;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Fibonacci extends AbstractMethod {
 
@@ -34,26 +33,22 @@ public class Fibonacci extends AbstractMethod {
 
     @Override
     public double start() {
-        makeIteration();
+        makeIterations(iterations);
         return result;
     }
 
     @Override
-    public void makeIteration() {
-        for (; iterationNumber <= iterations; iterationNumber++) {
+    public boolean makeIteration() {
             x1 = evaluateFirst();
             x2 = evaluateSecond();
-            double fx1 = Method.evaluate(x1);
-            double fx2 = Method.evaluate(x2);
-            evaluationsNumber += 2;
+            double fx1 = evaluate(x1);
+            double fx2 = evaluate(x2);
             if (Method.compare(fx1, fx2)) {
                 left = x1;
             } else {
                 right = x2;
             }
-            log();
-        }
-        finish();
+            return true;
     }
 
 
