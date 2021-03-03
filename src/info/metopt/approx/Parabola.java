@@ -36,7 +36,7 @@ public class Parabola extends AbstractMethod {
         fx1 = evaluate(x1);
         fx2 = evaluate(x2);
         fx3 = evaluate(x3);
-        makeIteration();
+        makeIterations();
         return result;
     }
 
@@ -52,7 +52,7 @@ public class Parabola extends AbstractMethod {
         return 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
     }
 
-    public double evaluateCurrentX(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
+    public static double evaluateCurrentX(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
         double a1 = evaluate_a1(x1, x2, x3, fx1, fx2, fx3);
         double a2 = evaluate_a2(x1, x2, x3, fx1, fx2, fx3);
         return (x1 + x2 - (a1 / a2)) / 2;
