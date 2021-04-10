@@ -1,12 +1,14 @@
 package info.metopt.approx;
 
-public interface Method {
+import info.metopt.approx.oneDimensional.OneDimensionalMethod;
 
-    double compareEpsilon = 1e-11;
+public interface Method<T> {
 
-    double evaluate(double argument);
+    double compareEpsilon = 1e-10;
 
-    double start();
+    double evaluate(T argument);
+
+    T start();
 
     boolean makeIteration();
 
@@ -18,11 +20,7 @@ public interface Method {
         return right - left;
     }
 
-    double evaluateFirst();
-
-    double evaluateSecond();
-
-    double getCurrentX();
+    T getCurrentX();
 
     void finish();
 
@@ -32,7 +30,5 @@ public interface Method {
         return first - second >= compareEpsilon;
     }
 
-
     void log();
-
 }

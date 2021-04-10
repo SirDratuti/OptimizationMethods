@@ -1,20 +1,28 @@
-package info.metopt.approx;
+package info.metopt.approx.oneDimensional;
 
-public class GoldenRatio extends AbstractMethod {
+import info.metopt.approx.Method;
+
+import java.util.function.Function;
+
+public class GoldenRatio extends AbstractOneDimensionalMethod {
     private double fx1;
     private double fx2;
     private double epsilonN;
 
-    public GoldenRatio(double left, double right, double epsilon) {
-        this(left, right, epsilon, false);
+    public GoldenRatio(Function<Double, Double> function, double left, double right, double epsilon) {
+        this(function, left, right, epsilon, false);
     }
 
-    public GoldenRatio(double left, double right, double epsilon, boolean isLog) {
-        super(left, right, epsilon, isLog);
+    public GoldenRatio(Function <Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        super(function, left, right, epsilon, isLog);
+    }
+
+    public GoldenRatio() {
+        super();
     }
 
     @Override
-    public double start() {
+    public Double start() {
         this.x1 = evaluateFirst();
         this.x2 = evaluateSecond();
         this.fx1 = evaluate(x1);
@@ -58,7 +66,12 @@ public class GoldenRatio extends AbstractMethod {
     }
 
     @Override
-    public double getCurrentX() {
+    public Double getCurrentX() {
         return (left + right) / 2.0;
+    }
+
+    @Override
+    public OneDimensionalMethod of(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        return new GoldenRatio(function, left, right, epsilon, isLog);
     }
 }

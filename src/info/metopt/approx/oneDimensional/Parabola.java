@@ -1,9 +1,12 @@
-package info.metopt.approx;
+package info.metopt.approx.oneDimensional;
+
+import info.metopt.approx.Method;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-public class Parabola extends AbstractMethod {
+public class Parabola extends AbstractOneDimensionalMethod {
 
     private double fx1;
     private double fx2;
@@ -17,19 +20,23 @@ public class Parabola extends AbstractMethod {
     double fCurrentX;
     int iterationNumber = 0;
 
-    public Parabola(double left, double right, double epsilon) {
-        this(left, right, epsilon, false);
+    public Parabola(Function <Double, Double> function, double left, double right, double epsilon) {
+        this(function, left, right, epsilon, false);
     }
 
-    public Parabola(double left, double right, double epsilon, boolean isLog) {
-        super(left, right, epsilon, isLog);
+    public Parabola(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        super(function, left, right, epsilon, isLog);
         a0s = new ArrayList<>();
         a1s = new ArrayList<>();
         a2s = new ArrayList<>();
     }
 
+    public Parabola() {
+        super();
+    }
+
     @Override
-    public double start() {
+    public Double start() {
         this.x1 = left;
         this.x3 = right;
         this.x2 = (right + left) / 2;
@@ -100,7 +107,7 @@ public class Parabola extends AbstractMethod {
     }
 
     @Override
-    public double getCurrentX() {
+    public Double getCurrentX() {
         return currentX;
     }
 
@@ -126,4 +133,8 @@ public class Parabola extends AbstractMethod {
         super.printList(a2s);
     }
 
+    @Override
+    public OneDimensionalMethod of(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        return new GoldenRatio(function, left, right, epsilon, isLog);
+    }
 }

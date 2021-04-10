@@ -1,19 +1,26 @@
-package info.metopt.approx;
+package info.metopt.approx.oneDimensional;
+
+import info.metopt.approx.Method;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
-public class Fibonacci extends AbstractMethod {
+public class Fibonacci extends AbstractOneDimensionalMethod {
 
     private ArrayList<Double> fibonacci = new ArrayList<>();
-    private final int iterations;
+    private int iterations;
     private int iterationNumber = 1;
 
-    public Fibonacci(double left, double right, double epsilon) {
-        this(left, right, epsilon, false);
+    public Fibonacci() {
+        super();
     }
 
-    public Fibonacci(double left, double right, double epsilon, boolean isLog) {
-        super(left, right, epsilon, isLog);
+    public Fibonacci(Function<Double, Double> function, double left, double right, double epsilon) {
+        this(function, left, right, epsilon, false);
+    }
+
+    public Fibonacci(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        super(function, left, right, epsilon, isLog);
         fibonacci.add(1.0);
         fibonacci.add(1.0);
         fibonacci.add(2.0);
@@ -32,7 +39,7 @@ public class Fibonacci extends AbstractMethod {
     }
 
     @Override
-    public double start() {
+    public Double start() {
         makeIterations(iterations);
         return result;
     }
@@ -69,8 +76,13 @@ public class Fibonacci extends AbstractMethod {
     }
 
     @Override
-    public double getCurrentX() {
+    public Double getCurrentX() {
         return ((x1 + x2) / 2.0);
+    }
+
+    @Override
+    public OneDimensionalMethod of(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        return new Fibonacci(function, left, right, epsilon, isLog);
     }
 
 }

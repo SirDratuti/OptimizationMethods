@@ -1,22 +1,30 @@
-package info.metopt.approx;
+package info.metopt.approx.oneDimensional;
 
-public class Brent extends AbstractMethod {
+import info.metopt.approx.Method;
+
+import java.util.function.Function;
+
+public class Brent extends AbstractOneDimensionalMethod {
 
     private double K = 1 - GOLDEN_PHI;
     private double x, v, w;
 
     private double d, e;
 
-    public Brent(double left, double right, double epsilon) {
-        this(left, right, epsilon, false);
+    public Brent(Function<Double, Double> function, double left, double right, double epsilon) {
+        this(function, left, right, epsilon, false);
     }
 
-    public Brent(double left, double right, double epsilon, boolean isLog) {
-        super(left, right, epsilon, isLog);
+    public Brent(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        super(function, left, right, epsilon, isLog);
+    }
+
+    public Brent() {
+        super();
     }
 
     @Override
-    public double start() {
+    public Double start() {
         x = left + K * (Method.range(left, right));
         v = x;
         w = x;
@@ -102,7 +110,7 @@ public class Brent extends AbstractMethod {
     }
 
     @Override
-    public double getCurrentX() {
+    public Double getCurrentX() {
         return (left + right) / 2.0;
     }
 
@@ -111,4 +119,8 @@ public class Brent extends AbstractMethod {
         return (a != b) && (a != c) && (b != c);
     }
 
+    @Override
+    public OneDimensionalMethod of(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        return new Brent(function, left, right, epsilon, isLog);
+    }
 }

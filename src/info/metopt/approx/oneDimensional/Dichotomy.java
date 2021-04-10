@@ -1,9 +1,12 @@
-package info.metopt.approx;
+package info.metopt.approx.oneDimensional;
+
+import info.metopt.approx.Method;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-public class Dichotomy extends AbstractMethod {
+public class Dichotomy extends AbstractOneDimensionalMethod {
 
     private double beta;
     private List<Double> x1s;
@@ -11,12 +14,12 @@ public class Dichotomy extends AbstractMethod {
     private List<Double> fx1s;
     private List<Double> fx2s;
 
-    public Dichotomy(double left, double right, double epsilon) {
-        this(left, right, epsilon, false);
+    public Dichotomy(Function <Double, Double> function, double left, double right, double epsilon) {
+        this(function, left, right, epsilon, false);
     }
 
-    public Dichotomy(double left, double right, double epsilon, boolean isLog) {
-        super(left, right, epsilon, isLog);
+    public Dichotomy(Function <Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        super(function, left, right, epsilon, isLog);
         beta = epsilon;
         this.x1 = evaluateFirst();
         this.x2 = evaluateSecond();
@@ -24,6 +27,10 @@ public class Dichotomy extends AbstractMethod {
         x2s = new ArrayList<>();
         fx1s = new ArrayList<>();
         fx2s = new ArrayList<>();
+    }
+
+    public Dichotomy() {
+        super();
     }
 
     @Override
@@ -53,7 +60,7 @@ public class Dichotomy extends AbstractMethod {
     }
 
     @Override
-    public double start() {
+    public Double start() {
         makeIterations();
         return result;
     }
@@ -86,8 +93,12 @@ public class Dichotomy extends AbstractMethod {
     }
 
     @Override
-    public double getCurrentX() {
+    public Double getCurrentX() {
         return (left + right) / 2.0;
     }
 
+    @Override
+    public OneDimensionalMethod of(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+        return new Dichotomy(function, left, right, epsilon, isLog);
+    }
 }
