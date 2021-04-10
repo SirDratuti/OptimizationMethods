@@ -17,7 +17,7 @@ public class Main {
 
         Vector b = new Vector(List.of(0.0, 0.0));
 
-        double c = 0;
+        double c = 13;
 
         Vector startX = new Vector(List.of(10.0, -21.0));
 
@@ -28,6 +28,6 @@ public class Main {
         ConjugateGradientMethod conjugateGradientMethod = new ConjugateGradientMethod(A, b, c, startX, epsilon,true);
         System.out.println(gradientDescentMethod.start());
         System.out.println(steepestDescentMethod.start());
-        //System.out.println(conjugateGradientMethod.start());
+        System.out.println(conjugateGradientMethod.start());
     }
 }
