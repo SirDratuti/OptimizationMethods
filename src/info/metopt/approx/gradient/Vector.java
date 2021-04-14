@@ -2,13 +2,21 @@ package info.metopt.approx.gradient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Vector {
     private List<Double> vector;
 
     public Vector(final List<Double> vector) {
-        this.vector = List.copyOf(vector);
+        this.vector = vector;
+    }
+
+    public Vector(int n) {
+        vector = new ArrayList<>(n);
+        for (int i = 0; i < n; ++i) {
+            vector.add(0.0);
+        }
     }
 
     public Double getX(final int index) {
@@ -65,6 +73,15 @@ public class Vector {
 
     public Vector numberMultiply(double coefficient) {
         return numberMultiply(this, coefficient);
+    }
+
+    public static Vector getRandomVector(int n, double maxValue) {
+        List<Double> list = new ArrayList<>(n);
+        Random random = new Random();
+        for (int i = 0; i < n; ++i) {
+            list.add(-maxValue + 2 * maxValue * random.nextDouble());
+        }
+        return new Vector(list);
     }
 
     @Override

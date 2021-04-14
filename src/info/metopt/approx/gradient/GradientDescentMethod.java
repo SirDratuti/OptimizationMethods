@@ -6,6 +6,7 @@ public class GradientDescentMethod extends AbstractGradientMethod {
 
     double fx;
     double startAlpha = 100;
+    private int maxIterationNumber;
 
     public GradientDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon, boolean isLog) {
         super(A, b, c, startX, epsilon, isLog);
@@ -13,6 +14,16 @@ public class GradientDescentMethod extends AbstractGradientMethod {
 
     public GradientDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon) {
         super(A, b, c, startX, epsilon, false);
+    }
+
+    public GradientDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon, double startAlpha) {
+        this(A, b, c, startX, epsilon, startAlpha, 5000, false);
+    }
+
+    public GradientDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon, double startAlpha, int maxIterationNumber, boolean isLog) {
+        super(A, b, c, startX, epsilon, isLog);
+        this.startAlpha = startAlpha;
+        this.maxIterationNumber = maxIterationNumber;
     }
 
     @Override
@@ -27,22 +38,22 @@ public class GradientDescentMethod extends AbstractGradientMethod {
     @Override
     public boolean makeIteration() {
         Vector gradientVector = evaluateGradient(x);
-        if (Method.compare(epsilon, gradientVector.norm())) {
+        if (Method.compare(epsilon, gradientVector.norm()) || numberIteration >= maxIterationNumber) {
             return false;
         }
         if (numberIteration % 100 == 0) {
             alpha = startAlpha;
         }
-        Vector y = x.sum(gradientVector.numberMultiply(-alpha/gradientVector.norm()));
-        double fy = evaluate(y);
+        Vector currentP = x.sum(gradientVector.numberMultiply(-alpha/gradientVector.norm()));
+        double fy = evaluate(currentP);
         if (!(fy < fx)) {
             while (fy >= fx) {
                 alpha /= 2.0;
-                y = x.sum(gradientVector.numberMultiply(-alpha / gradientVector.norm()));
-                fy = evaluate(y);
+                currentP = x.sum(gradientVector.numberMultiply(-alpha / gradientVector.norm()));
+                fy = evaluate(currentP);
             }
         }
-        x = y;
+        x = currentP;
         fx = fy;
         return true;
     }

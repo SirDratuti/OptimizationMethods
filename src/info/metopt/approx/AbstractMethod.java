@@ -73,9 +73,9 @@ public abstract class AbstractMethod<T> implements Method<T> {
 
     @Override
     public void makeIterations() {
-        log();
+        //log();
         for (; makeIteration(); ++numberIteration) {
-            log();
+            //log();
         }
         finish();
     }
@@ -100,7 +100,7 @@ public abstract class AbstractMethod<T> implements Method<T> {
 
     public void printLog() {
         System.out.println("МЕТОД: " + this.getClass());
-        System.out.println("ИТОГОВЫЙ X: " + result);
+        //System.out.println("ИТОГОВЫЙ X: " + result);
         System.out.println("ИТОГОВЫЙ f(X): " + evaluate(result));
         evaluationsNumber--;
         System.out.println("Количество вычислений функции: " + evaluationsNumber);
