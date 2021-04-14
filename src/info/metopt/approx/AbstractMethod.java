@@ -102,8 +102,6 @@ public abstract class AbstractMethod<T> implements Method<T> {
         System.out.println("МЕТОД: " + this.getClass());
         //System.out.println("ИТОГОВЫЙ X: " + result);
         System.out.println("ИТОГОВЫЙ f(X): " + evaluate(result));
-        evaluationsNumber--;
-        System.out.println("Количество вычислений функции: " + evaluationsNumber);
 //        System.out.println("иксы(" + xs.size() + "):");
 //        printList(xs);
 //        System.out.println("значения функции(" + fxs.size() + "):");

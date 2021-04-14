@@ -98,6 +98,8 @@ public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double
 
     public void printLog() {
         super.printLog();
+        evaluationsNumber--;
+        System.out.println("Количество вычислений функции: " + evaluationsNumber);
         System.out.println("правая граница(" + rights.size() + "): ");
         printList(rights);
         System.out.println("левая граница(" + lefts.size() + "): ");
