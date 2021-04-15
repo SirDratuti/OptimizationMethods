@@ -53,6 +53,7 @@ public class GradientDescentMethod extends AbstractGradientMethod {
                 fy = evaluate(currentP);
             }
         }
+        //System.out.println(x);
         x = currentP;
         fx = fy;
         return true;

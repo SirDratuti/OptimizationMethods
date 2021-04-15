@@ -56,13 +56,14 @@ public class SteepestDescentMethod extends AbstractGradientMethod {
     @Override
     public boolean makeIteration() {
         Vector gradientVector = evaluateGradient(x);
-        if (Method.compare(epsilon, gradientVector.norm()) || Method.compare(epsilon, alpha * gradientVector.norm()) || numberIteration > maxIterationNumber) {
+        if (Method.compare(epsilon, gradientVector.norm()) || Method.compare(epsilon, alpha * gradientVector.norm())
+                || numberIteration > maxIterationNumber || (numberIteration > 1 && Math.abs(evaluate(x) - evaluate(prefx)) <= (epsilon / 1000))) {
             return false;
         }
         Function<Double, Double> alphaFunction = (Double alpha) -> function.apply(x.sum(gradientVector.numberMultiply(-alpha)));
         alpha = oneDimensionalMethod.of(alphaFunction, 0, maxAlpha, epsilon, false).start();
         prefx = x;
-        System.out.println(x);
+       // System.out.println(x);
         x = x.sum(gradientVector.numberMultiply(-alpha));
         return true;
     }

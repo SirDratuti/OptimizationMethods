@@ -45,6 +45,7 @@ public class ConjugateGradientMethod extends AbstractGradientMethod {
         gradientVector = nextGradientVector;
         gradientNormSquare = nextGradientNormSquare;
         x = nextX;
+        //System.out.println(x);
         return true;
     }
 

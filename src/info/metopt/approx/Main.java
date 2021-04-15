@@ -14,13 +14,14 @@ public class Main {
         /*
          * condition factor
          */
-        double k = 4;
+        double k = 50;
+        int n = 10000;
 
-        Matrix matrixA = new RegularMatrix(List.of(List.of(2.0, 0.0), List.of(0.0, 8.0)));
+        Matrix matrixA = new RegularMatrix(List.of(List.of(8.0, 0.0), List.of(0.0, 2.0)));
 
-        Vector b = new Vector(List.of(4.0, 2.0));
+        Vector b = new Vector(List.of(2.0, 4.0));
 
-        double c = 0;
+        double c = 17;
 
         Vector startX = new Vector(List.of(10.0, 10.0));
 
@@ -31,24 +32,25 @@ public class Main {
 
         GradientDescentMethod gradientDescentMethod = new GradientDescentMethod(matrixA, b, c, startX, epsilon, startAlpha, 5000, true);
         SteepestDescentMethod steepestDescentMethod = new SteepestDescentMethod(matrixA, b, c, startX, epsilon, new Brent(), startAlpha, 1000, true);
-        ConjugateGradientMethod conjugateGradientMethod = new ConjugateGradientMethod(matrixA, b, c, startX, epsilon,true);
+        ConjugateGradientMethod conjugateGradientMethod = new ConjugateGradientMethod(matrixA, b, c, startX, epsilon, true);
         gradientDescentMethod.start();
         steepestDescentMethod.start();
         conjugateGradientMethod.start();
 
-        matrixA = new DiagonalMatrix(10_000, k);
 
-        b = Vector.getRandomVector(10_000, 6);
+        matrixA = new DiagonalMatrix(n, k);
+
+        b = Vector.getRandomVector(n, 6);
 
         c = 0;
 
-        startX = Vector.getRandomVector(10_000, 4);
+        startX = Vector.getRandomVector(n, 4);
 
-        /*gradientDescentMethod = new GradientDescentMethod(matrixA, b, c, startX, epsilon, startAlpha, 5000, true);
+        gradientDescentMethod = new GradientDescentMethod(matrixA, b, c, startX, epsilon, startAlpha, 5000, true);
         steepestDescentMethod = new SteepestDescentMethod(matrixA, b, c, startX, epsilon, new Dichotomy(), startAlpha, 1000, true);
-        conjugateGradientMethod = new ConjugateGradientMethod(matrixA, b, c, startX, epsilon,true);
+        conjugateGradientMethod = new ConjugateGradientMethod(matrixA, b, c, startX, epsilon, true);
         gradientDescentMethod.start();
         steepestDescentMethod.start();
-        conjugateGradientMethod.start();*/
+        conjugateGradientMethod.start();
     }
 }
