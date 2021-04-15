@@ -1,6 +1,7 @@
 package info.metopt.approx.gradient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class DiagonalMatrix implements Matrix {
             diagonal.add(1.0 + (k - 1.0) * random.nextDouble());
         }
         diagonal.add(k);
+        Collections.sort(diagonal);
     }
 
     @Override

@@ -69,24 +69,24 @@ public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double
         lens.add(right - left);
     }
 
-    @Override
-    public void makeIterations() {
-        log();
-        while (makeIteration()) {
-            log();
-        }
-        finish();
-    }
-
-    @Override
-    public void makeIterations(long n) {
-        log();
-        for (long i = 0; i < n; ++i) {
-            makeIteration();
-            log();
-        }
-        finish();
-    }
+//    @Override
+//    public void makeIterations() {
+//        log();
+//        while (makeIteration()) {
+//            log();
+//        }
+//        finish();
+//    }
+//
+//    @Override
+//    public void makeIterations(long n) {
+//        log();
+//        for (long i = 0; i < n; ++i) {
+//            makeIteration();
+//            log();
+//        }
+//        finish();
+//    }
 
     @Override
     public void finish() {
