@@ -46,10 +46,12 @@ public class GradientDescentMethod extends AbstractGradientMethod {
         }
         Vector currentP = x.sum(gradientVector.numberMultiply(-alpha / gradientVector.norm()));
         double fy = evaluate(currentP);
-        while (Method.compare(fy, fx)) {
-            alpha /= 2.0;
-            currentP = x.sum(gradientVector.numberMultiply(-alpha / gradientVector.norm()));
-            fy = evaluate(currentP);
+        if (!(fy < fx)) {
+            while ((fy >= fx)) {
+                alpha /= 2.0;
+                currentP = x.sum(gradientVector.numberMultiply(-alpha / gradientVector.norm()));
+                fy = evaluate(currentP);
+            }
         }
         x = currentP;
         fx = fy;

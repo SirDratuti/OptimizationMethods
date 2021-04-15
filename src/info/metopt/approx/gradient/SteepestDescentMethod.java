@@ -62,6 +62,7 @@ public class SteepestDescentMethod extends AbstractGradientMethod {
         Function<Double, Double> alphaFunction = (Double alpha) -> function.apply(x.sum(gradientVector.numberMultiply(-alpha)));
         alpha = oneDimensionalMethod.of(alphaFunction, 0, maxAlpha, epsilon, false).start();
         prefx = x;
+        System.out.println(x);
         x = x.sum(gradientVector.numberMultiply(-alpha));
         return true;
     }
