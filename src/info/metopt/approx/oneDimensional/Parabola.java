@@ -20,7 +20,7 @@ public class Parabola extends AbstractOneDimensionalMethod {
     double fCurrentX;
     int iterationNumber = 0;
 
-    public Parabola(Function <Double, Double> function, double left, double right, double epsilon) {
+    public Parabola(Function<Double, Double> function, double left, double right, double epsilon) {
         this(function, left, right, epsilon, false);
     }
 
@@ -56,7 +56,7 @@ public class Parabola extends AbstractOneDimensionalMethod {
     }
 
     public static double evaluate_a2(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
-        return 1 / (x3 - x2) * ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1));
+        return ((fx3 - fx1) / (x3 - x1) - (fx2 - fx1) / (x2 - x1)) / (x3 - x2);
     }
 
     public static double evaluateCurrentX(double x1, double x2, double x3, double fx1, double fx2, double fx3) {
@@ -67,6 +67,7 @@ public class Parabola extends AbstractOneDimensionalMethod {
 
     @Override
     public boolean makeIteration() {
+        numberIteration++;
         currentX = evaluateCurrentX(x1, x2, x3, fx1, fx2, fx3);
         if (iterationNumber > 0 && !Method.compare(Math.abs(currentX - prefX), epsilon)) {
             return false;

@@ -6,8 +6,9 @@ import java.util.function.Function;
 
 public class Brent extends AbstractOneDimensionalMethod {
 
-    private double K = 1 - GOLDEN_PHI;
-    private double x, v, w;
+    private static final double EPSILON = 1e-6;
+    private final double K = (3.0 - Math.sqrt(5.0)) / 2.0;
+    private double x, v, w,fx,fv,fw;
 
     private double d, e;
 
@@ -30,51 +31,47 @@ public class Brent extends AbstractOneDimensionalMethod {
         w = x;
         d = Method.range(left, right);
         e = d;
+        fx = fw = fv = function.apply(x);
         makeIterations();
         return result;
     }
 
     @Override
     public boolean makeIteration() {
-        double g = e;
+        numberIteration++;
+        double g;
+        g = e;
         e = d;
-        double tol = epsilon * Math.abs(x) + epsilon / 10.0;
-        if (Math.abs(x - (left + right) / 2.0) + Method.range(left, right) / 2.0 <= 2.0 * tol) {
-            return false;
-        }
-        boolean skip = false;
-        double u = left;
-        double fx = evaluate(x);
-        double fw = evaluate(w);
-        double fv = evaluate(v);
-        if (notEquals(x, w, v) && notEquals(fx, fw, fv)) {
-            double a0 = Parabola.evaluate_a0(x, w, v, fx, fw, fv);
-            double a1 = Parabola.evaluate_a1(x, w, v, fx, fw, fv);
-            double a2 = Parabola.evaluate_a2(x, w, v, fx, fw, fv);
-            u = (x + w - a1 / a2) / 2.0;
-            if (Method.compare(u, left) && Method.compare(right, u) && Math.abs(u - x) < g / 2.0) {
-                u = x - Math.signum(x - (left + right) / 2.0) * tol;
-                skip = true;
+        double u;
+        if (!(fx == fw || fx == fv || fv == fw)) {
+            u = x - (Math.pow((x - w), 2) * (fx - fv) - Math.pow((x - v), 2) * (fx - fw)) / (2 * ((x - w) * (fx - fv) - (x - v) * (fx - fw)));
+            if (u >= left + EPSILON && u <= right - EPSILON && Math.abs(u - x) < g / 2) {
+                d = Math.abs(u - x);
+            } else {
+                if (x < (right - left) / 2) {
+                    u = left + K * (right - x);
+                    d = right - x;
+                } else {
+                    u = right - K * (x - left);
+                    d = x - left;
+                }
             }
-        }
-
-        if (!skip) {
-            if (Method.compare((left + right) / 2.0, x)) {
+        } else {
+            if (x < (right - left) / 2) {
                 u = x + K * (right - x);
-                e = left - x;
+                d = right - x;
+
             } else {
                 u = x - K * (x - left);
-                e = x - right;
+                d = x - left;
+            }
+            if (Math.abs(u - x) < EPSILON) {
+                u = x + Math.signum(u - x) * EPSILON;
             }
         }
-
-        if (Method.compare(tol, Math.abs(u - x))) {
-            u = x + Math.signum(u - x) * tol;
-        }
-        d = Math.abs(u - x);
-        double fu = evaluate(u);
-        if (Method.compare(fx, fu)) {
-            if (Method.compare(u, x)) {
+        double fu = function.apply(u);
+        if (fu <= fx) {
+            if (u >= x) {
                 left = x;
             } else {
                 right = x;
@@ -82,21 +79,28 @@ public class Brent extends AbstractOneDimensionalMethod {
             v = w;
             w = x;
             x = u;
-
+            fv = fw;
+            fw = fx;
+            fx = fu;
         } else {
-            if (Method.compare(u, x)) {
+            if (u >= x) {
                 right = u;
             } else {
                 left = u;
             }
-            if (Method.compare(fw, fu)) {
+            if (fu <= fw || w == x) {
                 v = w;
                 w = u;
-            } else if (v == x || v == w) {
-                v = u;
+                fv = fw;
+                fw = fu;
+            } else {
+                if (fu <= fv || v == x || v == w){
+                    v = u;
+                    fv = fu;
+                }
             }
         }
-        return true;
+        return(cycleCondition());
     }
 
     @Override
@@ -116,7 +120,11 @@ public class Brent extends AbstractOneDimensionalMethod {
 
 
     private boolean notEquals(double a, double b, double c) {
-        return (a != b) && (a != c) && (b != c);
+        return !Method.equal(a, b) && !Method.equal(b, c) && !Method.equal(a, c);
+    }
+
+    boolean cycleCondition() {
+        return d > EPSILON;
     }
 
     @Override

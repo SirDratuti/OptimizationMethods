@@ -16,7 +16,7 @@ public interface Method<T> {
 
     void makeIterations(long n);
 
-    static double range(double left, double right){
+    static double range(double left, double right) {
         return right - left;
     }
 
@@ -26,8 +26,12 @@ public interface Method<T> {
 
     //true if first >= second
     //false else
-    static boolean compare(double first, double second){
+    static boolean compare(double first, double second) {
         return first - second >= compareEpsilon;
+    }
+
+    static boolean equal(double first, double second) {
+        return Math.abs((first - second)) <= compareEpsilon;
     }
 
     void log();

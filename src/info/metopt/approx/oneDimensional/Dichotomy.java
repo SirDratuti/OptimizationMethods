@@ -67,6 +67,7 @@ public class Dichotomy extends AbstractOneDimensionalMethod {
 
     @Override
     public boolean makeIteration() {
+        numberIteration++;
         x1 = evaluateFirst();
         x2 = evaluateSecond();
         double fx1 = evaluate(x1);

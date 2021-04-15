@@ -34,6 +34,7 @@ public class GoldenRatio extends AbstractOneDimensionalMethod {
 
     @Override
     public boolean makeIteration() {
+        numberIteration++;
         if (Method.compare(epsilon, epsilonN)) {
             return false;
         }

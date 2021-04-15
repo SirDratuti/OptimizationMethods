@@ -29,6 +29,10 @@ public abstract class AbstractMethod<T> implements Method<T> {
         evaluationsNumber = 0;
     }
 
+    public int getNumberIteration() {
+        return this.numberIteration;
+    }
+
     public AbstractMethod(Function<T, Double> function, double epsilon) {
         this(function, epsilon, false);
     }
