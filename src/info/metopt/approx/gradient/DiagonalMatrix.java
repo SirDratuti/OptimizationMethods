@@ -22,6 +22,12 @@ public class DiagonalMatrix implements Matrix {
         this.diagonal = diagonal;
     }
 
+    /**
+     * Generating a random diagonal matrix of size n whose ratio of the minimum eigenvalue to the maximum is k.
+     *
+     * @param n size of matrix.
+     * @param k ratio of the minimum eigenvalue to the maximum
+     */
     public DiagonalMatrix(int n, double k) {
         diagonal = new ArrayList<>(n);
         diagonal.add(1.0);
