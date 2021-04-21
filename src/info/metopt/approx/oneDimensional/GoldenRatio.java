@@ -4,6 +4,9 @@ import info.metopt.approx.Method;
 
 import java.util.function.Function;
 
+/**
+ * Implementation of the {@link OneDimensionalMethod} interface based on golden ratio method.
+ */
 public class GoldenRatio extends AbstractOneDimensionalMethod {
     private double fx1;
     private double fx2;

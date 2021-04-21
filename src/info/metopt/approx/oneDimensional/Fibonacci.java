@@ -5,6 +5,9 @@ import info.metopt.approx.Method;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+/**
+ * Implementation of the {@link OneDimensionalMethod} interface based on Fibonacci method.
+ */
 public class Fibonacci extends AbstractOneDimensionalMethod {
 
     private ArrayList<Double> fibonacci = new ArrayList<>();

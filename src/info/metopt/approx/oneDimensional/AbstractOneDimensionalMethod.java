@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Abstract class for {@link OneDimensionalMethod}.
+ */
 public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double> implements OneDimensionalMethod {
     public static final double GOLDEN_PHI = (Math.sqrt(5.0) - 1.0) / 2.0;
 
@@ -32,6 +35,15 @@ public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double
         ratios = new ArrayList<>();
         lens = new ArrayList<>();
     }
+
+    /**
+     * Simple constructor. <var>islog</var> default is false.
+     *
+     * @param function optimized function from {@link Double} to {@link Double}.
+     * @param left     left border of the segment.
+     * @param right    right border of the segment.
+     * @param epsilon  precision value.
+     */
     public AbstractOneDimensionalMethod(Function<Double, Double> function, double left, double right, double epsilon) {
         this(function, left, right, epsilon, false);
     }
@@ -52,10 +64,6 @@ public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double
         return lens;
     }
 
-    public long getEvaluationsNumber() {
-        return evaluationsNumber;
-    }
-
     @Override
     public void log() {
         if (!isLog) {
@@ -67,33 +75,6 @@ public abstract class AbstractOneDimensionalMethod extends AbstractMethod<Double
             ratios.add(((right - left) / lens.get(lens.size() - 1)));
         }
         lens.add(right - left);
-    }
-
-//    @Override
-//    public void makeIterations() {
-//        log();
-//        while (makeIteration()) {
-//            log();
-//        }
-//        finish();
-//    }
-//
-//    @Override
-//    public void makeIterations(long n) {
-//        log();
-//        for (long i = 0; i < n; ++i) {
-//            makeIteration();
-//            log();
-//        }
-//        finish();
-//    }
-
-    @Override
-    public void finish() {
-        result = getCurrentX();
-        if (isLog) {
-            printLog();
-        }
     }
 
     public void printLog() {

@@ -3,6 +3,7 @@ package info.metopt.approx;
 import info.metopt.approx.gradient.*;
 import info.metopt.approx.oneDimensional.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ public class Main {
          * condition factor
          */
         double k = 50;
+
         int n = 10000;
 
         Matrix matrixA = new RegularMatrix(List.of(List.of(8.0, 0.0), List.of(0.0, 2.0)));
@@ -52,5 +54,16 @@ public class Main {
         gradientDescentMethod.start();
         steepestDescentMethod.start();
         conjugateGradientMethod.start();
+
+
+        /*
+         * test for steepest method and different one dimensional methods
+         */
+        List<OneDimensionalMethod> oneDimensionalMethods = List.of(new Dichotomy(), new GoldenRatio(), new Fibonacci(), new Parabola(), new Brent());
+        for (OneDimensionalMethod oneDimensionalMethod : oneDimensionalMethods) {
+            steepestDescentMethod = new SteepestDescentMethod(matrixA, b, c, startX, epsilon, oneDimensionalMethod, startAlpha, 1000, true);
+            steepestDescentMethod.start();
+        }
+
     }
 }

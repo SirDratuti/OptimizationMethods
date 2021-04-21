@@ -6,10 +6,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the matrix interface for a diagonal matrix. Only the diagonal is stored.
+ */
 public class DiagonalMatrix implements Matrix {
 
     List<Double> diagonal;
 
+    /**
+     * Simple constructor.
+     *
+     * @param diagonal {@link List<Double>} values of diagonal.
+     */
     public DiagonalMatrix(List<Double> diagonal) {
         this.diagonal = diagonal;
     }
@@ -62,7 +70,7 @@ public class DiagonalMatrix implements Matrix {
     public Vector vectorMultiply(Vector vector) {
         List<Double> list = new ArrayList<>(getN());
         for (int index = 0; index < getN(); ++index) {
-            list.add(diagonal.get(index)*vector.getX(index));
+            list.add(diagonal.get(index) * vector.getX(index));
         }
         return new Vector(list);
     }

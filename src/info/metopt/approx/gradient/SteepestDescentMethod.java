@@ -5,12 +5,15 @@ import info.metopt.approx.oneDimensional.*;
 
 import java.util.function.Function;
 
+/**
+ * Implementation of the {@link GradientMethod} interface based on <a href="https://youtu.be/ELUI00I0NqM?t=101">the steepest descent method</a>.
+ */
 public class SteepestDescentMethod extends AbstractGradientMethod {
-    int maxIterationNumber = 5000;
-    double maxAlpha = 100;
+    protected int maxIterationNumber = 5000;
+    protected double maxAlpha = 100;
 
-    double fx;
-    Vector prefx;
+    protected double fx;
+    protected Vector prefx;
     private OneDimensionalMethod oneDimensionalMethod = null;
     private static OneDimensionalMethod DEFAULT_ONE_DIMENSIONAL_METHOD = new Brent();
 
@@ -29,6 +32,19 @@ public class SteepestDescentMethod extends AbstractGradientMethod {
         this.oneDimensionalMethod = oneDimensionalMethod;
     }
 
+    /**
+     * Constructor with basic values.
+     *
+     * @param A                    {@link Matrix} of coefficients of quadratic form. Element with row index <var>i</var> and column index <var>j</var> is the coefficient of x_i*x_j.
+     * @param b                    {@link Vector} of coefficients of quadratic form. Element with row index <var>i</var> is the coefficient of x_i.
+     * @param c                    onstant of quadratic form.
+     * @param startX               the point {@link Vector} from which we start looking for the minimum. The closer the point is to the minimum, the fewer iterations will be needed.
+     * @param epsilon              precision value.
+     * @param oneDimensionalMethod {@link OneDimensionalMethod} by which the optimal alpha step is calculated
+     * @param maxAlpha             maximum alpha step value
+     * @param maxIterationNumber   maximum number of iterations.
+     * @param isLog                log flag.
+     */
     public SteepestDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon, OneDimensionalMethod oneDimensionalMethod, double maxAlpha, int maxIterationNumber, boolean isLog) {
         super(A, b, c, startX, epsilon, isLog);
         this.maxAlpha = maxAlpha;
@@ -63,7 +79,6 @@ public class SteepestDescentMethod extends AbstractGradientMethod {
         Function<Double, Double> alphaFunction = (Double alpha) -> function.apply(x.sum(gradientVector.numberMultiply(-alpha)));
         alpha = oneDimensionalMethod.of(alphaFunction, 0, maxAlpha, epsilon, false).start();
         prefx = x;
-       // System.out.println(x);
         x = x.sum(gradientVector.numberMultiply(-alpha));
         return true;
     }

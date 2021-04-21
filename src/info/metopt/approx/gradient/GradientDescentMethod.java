@@ -2,6 +2,9 @@ package info.metopt.approx.gradient;
 
 import info.metopt.approx.Method;
 
+/**
+ * Implementation of the {@link GradientMethod} interface based on <a href="https://youtu.be/cYKniPRpgJM?t=832">the gradient descent method</a>.
+ */
 public class GradientDescentMethod extends AbstractGradientMethod {
 
     double fx;
@@ -20,6 +23,18 @@ public class GradientDescentMethod extends AbstractGradientMethod {
         this(A, b, c, startX, epsilon, startAlpha, 5000, false);
     }
 
+    /**
+     * Constructor with basic values.
+     *
+     * @param A                  {@link Matrix} of coefficients of quadratic form. Element with row index <var>i</var> and column index <var>j</var> is the coefficient of x_i*x_j.
+     * @param b                  {@link Vector} of coefficients of quadratic form. Element with row index <var>i</var> is the coefficient of x_i.
+     * @param c                  constant of quadratic form.
+     * @param startX             the point {@link Vector} from which we start looking for the minimum. The closer the point is to the minimum, the fewer iterations will be needed.
+     * @param epsilon            precision value.
+     * @param startAlpha         the initial value of the alpha step.
+     * @param maxIterationNumber maximum number of iterations.
+     * @param isLog              log flag.
+     */
     public GradientDescentMethod(Matrix A, Vector b, double c, Vector startX, double epsilon, double startAlpha, int maxIterationNumber, boolean isLog) {
         super(A, b, c, startX, epsilon, isLog);
         this.startAlpha = startAlpha;
@@ -53,7 +68,6 @@ public class GradientDescentMethod extends AbstractGradientMethod {
                 fy = evaluate(currentP);
             }
         }
-        //System.out.println(x);
         x = currentP;
         fx = fy;
         return true;

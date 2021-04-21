@@ -1,7 +1,5 @@
 package info.metopt.approx.oneDimensional;
 
-import info.metopt.approx.AbstractMethod;
-
 import java.util.function.Function;
 
 public class OneDimensionalTest {
@@ -23,9 +21,5 @@ public class OneDimensionalTest {
         System.out.println(parabola.getNumberIteration());
         System.out.println(brent.start());
         System.out.println(brent.getNumberIteration());
-    }
-
-    public static double logbase(Double base, Double value) {
-        return Math.log(value) / Math.log(base);
     }
 }

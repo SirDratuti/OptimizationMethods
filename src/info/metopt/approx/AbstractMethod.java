@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Abstract class implementing interface {@link Method}.
+ *
+ * @param <T> function argument type.
+ */
 public abstract class AbstractMethod<T> implements Method<T> {
 
     protected Function<T, Double> function;
@@ -17,9 +22,20 @@ public abstract class AbstractMethod<T> implements Method<T> {
     private List<Double> fxs;
     protected long evaluationsNumber;
 
-    public AbstractMethod() {}
+    /**
+     * Default constructor.
+     */
+    public AbstractMethod() {
+    }
 
 
+    /**
+     * Constructor for method.
+     *
+     * @param function optimized function from {@link T} to {@link Double}.
+     * @param epsilon  precision value.
+     * @param isLog    log flag.
+     */
     public AbstractMethod(Function<T, Double> function, double epsilon, boolean isLog) {
         this.function = function;
         this.epsilon = epsilon;
@@ -29,6 +45,7 @@ public abstract class AbstractMethod<T> implements Method<T> {
         evaluationsNumber = 0;
     }
 
+    @Override
     public int getNumberIteration() {
         return this.numberIteration;
     }
@@ -58,6 +75,9 @@ public abstract class AbstractMethod<T> implements Method<T> {
         return function.apply(argument);
     }
 
+    /**
+     * Writes the current values of the approximate arguments and values of the function.
+     */
     @Override
     public void log() {
         if (!isLog) {
@@ -77,9 +97,9 @@ public abstract class AbstractMethod<T> implements Method<T> {
 
     @Override
     public void makeIterations() {
-        //log();
+        log();
         for (; makeIteration(); ++numberIteration) {
-            //log();
+            log();
         }
         finish();
     }
@@ -102,6 +122,9 @@ public abstract class AbstractMethod<T> implements Method<T> {
         }
     }
 
+    /**
+     * Prints the log to the console.
+     */
     public void printLog() {
         System.out.println("МЕТОД: " + this.getClass());
         //System.out.println("ИТОГОВЫЙ X: " + result);

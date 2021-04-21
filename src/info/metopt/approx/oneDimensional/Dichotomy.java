@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Implementation of the {@link OneDimensionalMethod} interface based on dichotomy method.
+ */
 public class Dichotomy extends AbstractOneDimensionalMethod {
 
     private double beta;
@@ -14,11 +17,11 @@ public class Dichotomy extends AbstractOneDimensionalMethod {
     private List<Double> fx1s;
     private List<Double> fx2s;
 
-    public Dichotomy(Function <Double, Double> function, double left, double right, double epsilon) {
+    public Dichotomy(Function<Double, Double> function, double left, double right, double epsilon) {
         this(function, left, right, epsilon, false);
     }
 
-    public Dichotomy(Function <Double, Double> function, double left, double right, double epsilon, boolean isLog) {
+    public Dichotomy(Function<Double, Double> function, double left, double right, double epsilon, boolean isLog) {
         super(function, left, right, epsilon, isLog);
         beta = epsilon;
         this.x1 = evaluateFirst();

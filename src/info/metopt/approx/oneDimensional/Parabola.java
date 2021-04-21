@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Implementation of the {@link OneDimensionalMethod} interface based on parabola method.
+ */
 public class Parabola extends AbstractOneDimensionalMethod {
 
     private double fx1;
