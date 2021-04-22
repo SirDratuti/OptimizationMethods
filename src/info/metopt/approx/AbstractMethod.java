@@ -126,12 +126,12 @@ public abstract class AbstractMethod<T> implements Method<T> {
      * Prints the log to the console.
      */
     public void printLog() {
-        System.out.println("МЕТОД: " + this.getClass());
-        //System.out.println("ИТОГОВЫЙ X: " + result);
-        System.out.println("ИТОГОВЫЙ f(X): " + evaluate(result));
-//        System.out.println("иксы(" + xs.size() + "):");
+//        System.out.println("Method: " + this.getClass());
+        //System.out.println("Result X: " + result);
+ //       System.out.println("Result f(X): " + evaluate(result));
+//        System.out.println("x'es(" + xs.size() + "):");
 //        printList(xs);
-//        System.out.println("значения функции(" + fxs.size() + "):");
+//        System.out.println("function's value(" + fxs.size() + "):");
 //        printList(fxs);
     }
 }

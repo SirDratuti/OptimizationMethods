@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"info.metopt.approx"},{"l":"info.metopt.approx.gradient"},{"l":"info.metopt.approx.oneDimensional"}];updateSearchResults();
