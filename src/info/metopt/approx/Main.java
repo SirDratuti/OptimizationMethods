@@ -2,11 +2,7 @@ package info.metopt.approx;
 
 import info.metopt.approx.gradient.*;
 import info.metopt.approx.oneDimensional.*;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -19,7 +15,7 @@ public class Main {
 
         int n = 10000;
 
-        Matrix matrixA = new RegularMatrix(List.of(List.of(8.0, 0.0), List.of(0.0, 2.0)));
+        Matrix matrixA = new RegularMatrix(List.of(List.of(128.0, 0.0), List.of(0.0, 2.0)));
 
         Vector b = new Vector(List.of(2.0, 4.0));
 
